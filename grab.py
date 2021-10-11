@@ -1,20 +1,10 @@
 from selenium import webdriver
 
 from time import sleep
-start_url = 'https://www.instagram.com/josephclaytonhansen/saved/art/17895068137323792/'
+start_url = 'https://www.instagram.com/USER/saved/COLLECTION_NAME/COLLECTION_ID/' 
+#change this!
 index = 1
 
-def filename(ind):
-    if ind < 10:
-        filename = "000"+str(ind)
-    elif ind >= 10 < 100:
-        filename = "00"+str(ind)
-    elif ind >= 100 < 1000:
-        filename = "0"+str(ind)
-    elif ind >= 1000:
-        filename = str(ind)
-    return filename
- 
 driver = webdriver.Chrome()
  
 driver.get(start_url)
@@ -30,7 +20,7 @@ if wait:
         try:
             driver.find_element_by_class_name('fXIG0')
         except:
-            f = "raw_screenshots/"+filename(index)+".png"
+            f = "raw_screenshots/"+str(index)+".png"
             index+=1
             sleep(3)
             driver.save_screenshot(f)
