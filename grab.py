@@ -1,28 +1,52 @@
+from bs4 import BeautifulSoup
 from selenium import webdriver
 
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+ 
+import os
 from time import sleep
-start_url = 'https://www.instagram.com/USER/saved/COLLECTION_NAME/COLLECTION_ID/' 
-#change this!
+start_url = 'https://www.instagram.com/josephhansen_art/saved/art/17895068137323792/'
 index = 1
 
-driver = webdriver.Chrome()
+def filename(ind):
+    if ind < 10:
+        filename = "000"+str(ind)
+    elif ind >= 10 and ind < 100:
+        filename = "00"+str(ind)
+    elif ind >= 100 and ind < 1000:
+        filename = "0"+str(ind)
+    elif ind >= 1000:
+        filename = str(ind)
+    return filename
+ 
+driver = webdriver.Chrome("chromedriver.exe")
  
 driver.get(start_url)
+sleep(2)
+driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[2]/form/div/div[1]/div/label/input").send_keys("josephhansen_art")
 wait = input("Logged in?")
+go = int(input("how many?"))
 
-next_picture = '/html/body/div[6]/div[1]/div/div/a[2]'
+next_picture = '/html/body/div[5]/div[2]/div/div[2]/button'
 
 if wait:
-    first_click = '//*[@id="react-root"]/section/main/div/div/div[3]/article/div[1]/div/div[1]/div[3]'
+    first_click = '/html/body/div[1]/section/main/div/div/div[3]/article/div[1]/div/div[1]/div[2]/a/div/div[2]'
     
     driver.find_element_by_xpath(first_click).click()
-    for x in range(0,5000):
+    sleep(2)
+    
+    for x in range(0,go-1):
         try:
-            driver.find_element_by_class_name('fXIG0')
-        except:
-            f = "raw_screenshots/"+str(index)+".png"
+            div = driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/article/div/div[1]/div/div/div[1]')
+            by = div.screenshot_as_png
+            with open("raw_screenshots/"+filename(index)+".png", "wb") as f:
+                f.write(by)
             index+=1
-            sleep(3)
-            driver.save_screenshot(f)
-            driver.find_element_by_xpath(next_picture).click()
+            driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/div[2]/button').click()
+            sleep(2)
+        except Exception as e:
+            print(e)
+
     driver.quit()
+
