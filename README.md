@@ -1,4 +1,4 @@
-# Instagram Collection Batch Grab
+# Instagram Collection Batch Grab - Screenshot your saved Instagram collections
 Given an Instagram collection, screenshot each item and save. No cropping needed, as this new implementation simply screenshots the whole element (image, or still frame from a video)
 
 Since I have to debug and update this every couple weeks, let me just say: 
