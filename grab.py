@@ -28,25 +28,27 @@ driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[
 wait = input("Logged in?")
 go = int(input("how many?"))
 
-next_picture = '/html/body/div[5]/div[2]/div/div[2]/button'
+next_picture = '/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div[1]/div/div/div[2]/button'
 
 if wait:
-    first_click = '/html/body/div[1]/section/main/div/div/div[3]/article/div[1]/div/div[1]/div[2]/a/div/div[2]'
+    first_click = '/html/body/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[1]/section/main/div/div/div[3]/article/div[1]/div/div[1]/div[2]/a/div[1]/div[2]'
     
     driver.find_element_by_xpath(first_click).click()
     sleep(2)
     
     for x in range(0,go-1):
+        sleep(1)
         try:
-            div = driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/article/div/div[1]/div/div/div[1]')
+            div = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div/div/div[1]/div/div[3]/div/div/div/div/div[2]/div/article/div/div[1]/div/div[1]/div[2]/div/div/div/ul/li[2]/div/div/div/div/div[1]')
             by = div.screenshot_as_png
             with open("raw_screenshots/"+filename(index)+".png", "wb") as f:
                 f.write(by)
             index+=1
-            driver.find_element_by_xpath('/html/body/div[6]/div[2]/div/div[2]/button').click()
+            driver.find_element_by_xpath(next_picture).click()
             sleep(2)
         except Exception as e:
             print(e)
+            sleep(2)
 
     driver.quit()
 
