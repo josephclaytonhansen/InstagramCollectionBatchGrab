@@ -6,7 +6,8 @@ from selenium.webdriver.common.action_chains import ActionChains
  
 import os
 from time import sleep
-start_url = 'https://www.instagram.com/josephhansen_art/saved/art/17895068137323792/'
+start_url = 'https://www.instagram.com/USER/saved/COLLECTION_NAME/COLLECTION_ID/' 
+#change this!
 index = 1
 
 def filename(ind):
@@ -24,7 +25,7 @@ driver = webdriver.Chrome("chromedriver.exe")
  
 driver.get(start_url)
 sleep(2)
-driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[2]/form/div/div[1]/div/label/input").send_keys("josephhansen_art")
+driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[2]/form/div/div[1]/div/label/input").send_keys("<username>")
 wait = input("Logged in?")
 go = int(input("how many?"))
 
