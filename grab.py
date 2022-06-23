@@ -7,6 +7,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import os
 from time import sleep
 start_url = 'https://www.instagram.com/USER/saved/COLLECTION_NAME/COLLECTION_ID/' 
+username = "USERNAME"
 #change this!
 index = 1
 
@@ -25,7 +26,11 @@ driver = webdriver.Chrome("chromedriver.exe")
  
 driver.get(start_url)
 sleep(2)
-driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[2]/form/div/div[1]/div/label/input").send_keys("<username>")
+try:
+    driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div/div[1]/div[2]/form/div/div[1]/div/label/input").send_keys(username)
+except:
+    print("non-permissable login screen, enter credentials manually")
+    
 wait = input("Logged in?")
 go = int(input("how many?"))
 
